@@ -2,17 +2,13 @@ import React, { useEffect, useState } from 'react';
 import SectionTitles from '../../../Sharedcomponents/SharedTiitles/SectionTitles';
 import axios from 'axios';
 import Menucard from '../../../Sharedcomponents/MenuitemCard/Menucard';
+import useMenudata from '../../../hooks/useMenudata';
 
 const Menu = () => {
-    const [menu,setMenu] = useState([])
-    useEffect(() =>{
-        axios.get('Menu.json')
-        .then(res =>{
-            const popularItems = res.data.filter(item => item.category === "popular")
-            setMenu(popularItems)
-        } )
-    },[])
+    const [menu] = useMenudata();
     // console.log(menu);
+    const popular = menu.filter(item => item.category === "popular")
+    // console.log(popular);
     
     return (
         <div className='my-8'>
@@ -20,7 +16,7 @@ const Menu = () => {
             </SectionTitles>
             <div className='grid md:grid-cols-2 gap-3'>
                 {
-                    menu.map(item => <Menucard key={item._id} item={item}></Menucard>)
+                    popular.map(item => <Menucard key={item._id} item={item}></Menucard>)
                 }
             </div>
         </div>
