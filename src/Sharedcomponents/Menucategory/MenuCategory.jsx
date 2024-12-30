@@ -1,6 +1,8 @@
 import React from "react";
 import Menucard from "../MenuitemCard/Menucard";
 import Cover from "../Cover/Cover";
+import { Link } from "react-router-dom";
+import Button from "../Button/Button";
 
 const MenuCategory = ({ items, itemsImg, title }) => {
   return (
@@ -11,6 +13,7 @@ const MenuCategory = ({ items, itemsImg, title }) => {
           <Menucard key={item._id} item={item}></Menucard>
         ))}
       </div>
+      <Link to={`/orderMenu/${title}`}> <Button title={"Order Now"} classes="bg-black"></Button> </Link>
     </div>
   );
 };

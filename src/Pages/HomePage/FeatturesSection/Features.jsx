@@ -12,7 +12,7 @@ const Features = () => {
           <SectionTitles
             heading={"From Our Menu"}
             subheading={"check it out"}
-            color="text-yellow"
+            color="text-white"
           ></SectionTitles>
         </div>
         <div className="flex  items-center justify-center">
