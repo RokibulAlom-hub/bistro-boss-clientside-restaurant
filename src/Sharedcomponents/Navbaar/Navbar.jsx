@@ -1,20 +1,20 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, NavLink } from "react-router-dom";
+import { Authcontext } from "../../AuthProvider/AuthProvider";
 
 const Navbar = () => {
+  const { userLogout, user } = useContext(Authcontext);
+
   const Navoptions = (
     <>
       <li>
-        <NavLink to='/'>Home</NavLink>
+        <NavLink to="/">Home</NavLink>
       </li>
       <li>
-      <NavLink to='/ourmenu'>OurMenu</NavLink>
+        <NavLink to="/ourmenu">OurMenu</NavLink>
       </li>
       <li>
-      <NavLink to='/orderMenu/salad'>OrderMenu</NavLink>
-      </li>
-      <li>
-      <NavLink to='/login'>Login</NavLink>
+        <NavLink to="/orderMenu/salad">OrderMenu</NavLink>
       </li>
     </>
   );
@@ -43,18 +43,30 @@ const Navbar = () => {
               tabIndex={0}
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
-             {Navoptions}
+              {Navoptions}
             </ul>
           </div>
           <a className="btn btn-ghost text-xl">Bistro-Boss</a>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
-            {Navoptions}
-          </ul>
+          <ul className="menu menu-horizontal px-1">{Navoptions}</ul>
         </div>
         <div className="navbar-end">
-          <a className="btn">Button</a>
+          {user ? (
+            <p className="btn bg-yellow-200">
+              {" "}
+              <Link> Logout</Link>
+            </p>
+          ) : (
+            <>
+              <li>
+                <NavLink to="/login">Login</NavLink>
+              </li>
+              <li>
+                <NavLink to="/register">Register</NavLink>
+              </li>
+            </>
+          )}
         </div>
       </div>
     </div>

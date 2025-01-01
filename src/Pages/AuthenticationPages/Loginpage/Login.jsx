@@ -1,15 +1,40 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
+import {
+  loadCaptchaEnginge,
+  LoadCanvasTemplate,
+  validateCaptcha,
+} from "react-simple-captcha";
+import { Authcontext } from "../../../AuthProvider/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-    const handleSubmit =(e) => {
-       e.preventDefault();
-       const form = e.target;
-       const email = form.email.value
-       const password = form.password.value
-        
-       console.log(email,password);
-       
+  const navigate = useNavigate();
+  const [disabled, setdisabled] = useState(true);
+  const { userLogin } = useContext(Authcontext);
+  useEffect(() => {
+    loadCaptchaEnginge(6);
+  }, []);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    userLogin(email, password).then((result) => {
+      console.log(result.user);
+      alert("user loged in");
+      navigate("/");
+    });
+  };
+  const handleCaptcha = (event) => {
+    event.preventDefault();
+    const Captchavalue = event.target.value;
+    console.log(Captchavalue);
+
+    if (validateCaptcha(Captchavalue)) {
+      setdisabled(false);
     }
+  };
   return (
     <div className="hero bg-base-200 min-h-screen">
       <div className="hero-content flex-col md:flex-row">
@@ -52,8 +77,23 @@ const Login = () => {
                 </a>
               </label>
             </div>
+            <div className="form-control">
+              <label className="label">
+                <LoadCanvasTemplate />
+              </label>
+              <input
+                type="text"
+                onBlur={handleCaptcha}
+                name="capctha"
+                placeholder="fill the capctha"
+                className="input input-bordered"
+                required
+              />
+            </div>
             <div className="form-control mt-6">
-              <button className="btn btn-primary">Login</button>
+              <button disabled={disabled} className="btn btn-primary">
+                Login
+              </button>
             </div>
           </form>
         </div>
