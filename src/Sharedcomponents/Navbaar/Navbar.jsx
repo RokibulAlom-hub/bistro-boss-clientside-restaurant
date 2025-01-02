@@ -4,7 +4,12 @@ import { Authcontext } from "../../AuthProvider/AuthProvider";
 
 const Navbar = () => {
   const { userLogout, user } = useContext(Authcontext);
-
+  const logout = () =>{
+      userLogout()
+      .then(result => {
+        alert('lgoout success')
+      })
+  }
   const Navoptions = (
     <>
       <li>
@@ -53,7 +58,7 @@ const Navbar = () => {
         </div>
         <div className="navbar-end">
           {user ? (
-            <p className="btn bg-yellow-200">
+            <p onClick={logout} className="btn bg-yellow-200">
               {" "}
               <Link> Logout</Link>
             </p>

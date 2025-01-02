@@ -5,11 +5,12 @@ import {
   validateCaptcha,
 } from "react-simple-captcha";
 import { Authcontext } from "../../../AuthProvider/AuthProvider";
-import { useNavigate } from "react-router-dom";
+import { replace, useLocation, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [disabled, setdisabled] = useState(true);
+  const location = useLocation()
+    const [disabled, setdisabled] = useState(true);
   const { userLogin } = useContext(Authcontext);
   useEffect(() => {
     loadCaptchaEnginge(6);
@@ -23,7 +24,8 @@ const Login = () => {
     userLogin(email, password).then((result) => {
       console.log(result.user);
       alert("user loged in");
-      navigate("/");
+      const from = location.state?.from?.pathname || '/'
+      navigate(from,{replace:true})
     });
   };
   const handleCaptcha = (event) => {

@@ -5,6 +5,8 @@ import OurMenu from "../Pages/MenuPage/Menu/OurMenu";
 import OrderMenu from "../Pages/OrderPage/OrderMenu/OrderMenu";
 import Login from "../Pages/AuthenticationPages/Loginpage/Login";
 import Register from "../Pages/AuthenticationPages/Register/Register";
+import Privateroute from "./Privateroute/Privateroute";
+import Demo from "../Pages/PrivateroutePages/demo";
 
 export const router =createBrowserRouter([
     {
@@ -30,6 +32,10 @@ export const router =createBrowserRouter([
             {
                 path:'/register',
                 element:<Register></Register>
+            },
+            {
+                path:'demo',
+                element:<Privateroute><Demo></Demo></Privateroute>
             }
         ]
     },
