@@ -12,7 +12,7 @@ const OrderMenu = () => {
   const iniatialIndex = categories.indexOf(category);
   const [tabIndex, setTabindex] = useState(iniatialIndex);
   const [menu] = useMenudata();
-  console.log(menu);
+  // console.log(menu);
 
   const offered = menu.filter((item) => item.category === "offered");
   const desserts = menu.filter((item) => item.category === "dessert");
