@@ -19,7 +19,8 @@ const FoodCard = ({ item }) => {
         foodId:_id,
         email:user?.email,
         image,
-        name
+        name,
+        price
       }
       axiosSecure.post('/carts',cartInfo)
       .then(res => {

@@ -23,10 +23,10 @@ const Navbar = () => {
       <li>
         <NavLink to="/orderMenu/salad">OrderMenu</NavLink>
       </li>
-      <button className="btn ">
+      <Link to='/dashboard/mycart' className="btn ">
         <FiShoppingCart />
         <div className="badge badge-secondary">+{cart.length}</div>
-      </button>
+      </Link>
     </>
   );
   return (
