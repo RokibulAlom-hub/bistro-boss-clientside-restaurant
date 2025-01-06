@@ -2,7 +2,10 @@ import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Authcontext } from "../../../AuthProvider/AuthProvider";
 import { useNavigate } from "react-router-dom";
+import usePublicaxios from "../../../hooks/usePublicaxios";
+import SocialLogin from "../../../hooks/SocialLogin/SocialLogin";
 const Register = () => {
+  const axiosPublic = usePublicaxios()
     const navigate = useNavigate()
     const {createUserByemail} = useContext(Authcontext);
     const {
@@ -14,7 +17,12 @@ const Register = () => {
       const onSubmit= (data) => {
         createUserByemail(data.email,data.password)
         .then(result => {
+            const userInfo = {
+              email: data?.email,
+              name:data?.name
+            }
             console.log(result.user);
+            axiosPublic.post('/users',userInfo)
             alert('register success')
             navigate('/')
         })
@@ -77,6 +85,7 @@ const Register = () => {
                 Register
               </button>
             </div>
+            <SocialLogin></SocialLogin>
           </form>
         </div>
       </div>
