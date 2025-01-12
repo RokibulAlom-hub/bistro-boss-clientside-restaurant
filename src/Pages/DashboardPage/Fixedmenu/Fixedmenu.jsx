@@ -1,8 +1,9 @@
 import { FaCalendar, FaHistory, FaHome, FaMailBulk } from "react-icons/fa";
 import { FaBook, FaBreadSlice, FaCartFlatbed, FaList, FaPeopleRobbery, FaShop, FaSpoon } from "react-icons/fa6";
-import { Link, NavLink } from "react-router-dom";
+import {  NavLink } from "react-router-dom";
+import useAdmin from "../../../hooks/useAdmin";
 const Fixedmenu = () => {
-  const isAdmin = true;
+  const [isAdmin] = useAdmin()
   return (
     <div>
       <div>
@@ -13,11 +14,11 @@ const Fixedmenu = () => {
                 <FaHome />
                 Admin Home
               </NavLink>
-              <NavLink className="text-black flex gap-2">
+              <NavLink to="additems" className="text-black flex gap-2">
                 <FaSpoon />
                 Add Item
               </NavLink>
-              <NavLink className="text-black flex gap-2">
+              <NavLink to="manageItems" className="text-black flex gap-2">
                 <FaList />
                 Manage Items
               </NavLink>

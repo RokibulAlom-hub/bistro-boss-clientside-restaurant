@@ -8,7 +8,7 @@ const Dashboard = () => {
       <div className="w-56 min-h-screen bg-gold-600 text-white">
         <Fixedmenu></Fixedmenu>
       </div>
-      <div>
+      <div className="w-full">
         <Outlet></Outlet>
       </div>
     </div>

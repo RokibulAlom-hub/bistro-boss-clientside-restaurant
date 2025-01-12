@@ -1,10 +1,12 @@
 import { BsGoogle } from "react-icons/bs";
 import useAuth from "../useAuth";
 import usePublicaxios from "../usePublicaxios";
+import { useNavigate } from "react-router-dom";
 
 const SocialLogin = () => {
   const { googlelogin } = useAuth();
   const axiosPublic = usePublicaxios()
+  const navigate = useNavigate()
   const handlegoggle = () => {
     googlelogin()
         .then((result) => {
@@ -17,7 +19,7 @@ const SocialLogin = () => {
            axiosPublic.post(`/users`,userInfo)
            .then(res => {
             console.log(res.data);
-            
+            navigate('/')
            })
         })
         .catch((err) => console.log(err.message)

@@ -5,6 +5,7 @@ import Menu from "../MenuItems/Menu";
 import Features from "../FeatturesSection/Features";
 import Testomonial from "../Testomonial/Testomonial";
 import { Helmet } from "react-helmet-async";
+import RoleBasedUI from "../../RoleBasedUI";
 
 const Home = () => {
   return (
@@ -14,6 +15,7 @@ const Home = () => {
       </Helmet>
       <Banner></Banner>
       <Slider></Slider>
+      <RoleBasedUI></RoleBasedUI>
       <Menu></Menu>
       <Features></Features>
       <Testomonial></Testomonial>

@@ -1,19 +1,34 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import useAxiossecure from "../../../hooks/useAxiossecure";
-import { FaDeleteLeft } from "react-icons/fa6";
+import { FaDeleteLeft, FaUser, FaUsers } from "react-icons/fa6";
 
 const Allusers = () => {
   const axiosSecure = useAxiossecure();
-  const { data: users = [] } = useQuery({
+  const { data: users = [], refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
       const res = await axiosSecure.get("/users");
       return res.data;
     },
   });
+  const handleDelete = (_id) => {
+  axiosSecure.delete(`/users/${_id}`)
+  .then((res) => {
+    console.log(res.data)
+    refetch();
+  })
+  };
+  const handleMakeadmin = (id) =>{
+    axiosSecure.patch(`/users/admin/${id}`)
+    .then(res => {
+      console.log(res.data);
+      alert('updated')
+      refetch()
+    })
+  }
   return (
-    <div className="w-10/12 mx-auto">
+    <div className="w-full ml-3">
       <div className="flex justify-between">
         <h2>All users {users.length}</h2>
         {/* <h1>Total Price {totalPrice}</h1> */}
@@ -27,6 +42,7 @@ const Allusers = () => {
               <tr>
                 <th>email</th>
                 <th>Name</th>
+                <th>Role</th>
               </tr>
             </thead>
             <tbody>
@@ -35,21 +51,23 @@ const Allusers = () => {
                 <tr key={user._id}>
                   {/* <td>{index+1}</td> */}
                   <td>
-                    <div className="flex items-center gap-3">
-                      <div>
-                        <div className="font-bold">{user?.email}</div>  
-                      </div>
-                      <div>
-                        <div className="font-bold">{user?.name}</div>
-                      </div>
-                    </div>
+                    <h2 className="">{user?.email}</h2>
                   </td>
-                  {/* <td>${user?.price}</td> */}
-                  <th>
-                    <button className="btn btn-ghost btn-xs">
-                      <FaDeleteLeft />
+                  <td>
+                    <h1 className="">{user?.name}</h1>
+                  </td>
+                  <td>
+                   { user?.role === "admin" ? "Admin" : <button onClick={() =>handleMakeadmin(user?._id)}>
+                      
+                      <FaUsers className="bg-orange-400 text-2xl"></FaUsers>
                     </button>
-                  </th>
+                    }
+                  </td>
+                  <td>
+                    <button onClick={() => handleDelete(user._id)}>
+                      <FaDeleteLeft></FaDeleteLeft>
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
